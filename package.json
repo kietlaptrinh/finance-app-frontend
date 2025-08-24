@@ -30,6 +30,9 @@
     "source-map-js": "^1.2.1",
     "update-browserslist-db": "^1.1.3"
   },
+  "overrides": {
+    "typescript": "4.9.5"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
