@@ -10,6 +10,7 @@ import Header from '../components/Header';
 import { useTranslation } from 'react-i18next';
 import { useCurrency } from '../contexts/CurrencyContext'; 
 import { formatAndConvertCurrency } from '../utils/formatCurrency';
+import { useMemo } from 'react';
 
 const SummaryCard = ({ title, amount, cardType}) => {
   const { currency, exchangeRate } = useCurrency();
@@ -48,6 +49,7 @@ export default function DashboardPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [categories, setCategories] = useState([]);
 
   const handleDeleteTransaction = async (id) => {
     try {
@@ -64,11 +66,12 @@ export default function DashboardPage() {
     try {
       const month = new Date().getMonth() + 1;
       const year = new Date().getFullYear();
-      const [analyticsRes, transactionsRes, rulesRes, eventsRes] = await Promise.all([
+      const [analyticsRes, transactionsRes, rulesRes, eventsRes, categoriesRes] = await Promise.all([
         api.fetchDashboardSummary(month, year),
         api.fetchTransactions({ page: 1, pageSize: 10 }),
         api.fetchBudgetRules().catch(() => ({ data: [] })),
         api.fetchCalendarEvents().catch(() => ({ data: [] })),
+        api.fetchCategories(),
       ]);
       setAnalytics(analyticsRes.data);
       const transactionData = Array.isArray(transactionsRes.data.transactions) 
@@ -77,6 +80,7 @@ export default function DashboardPage() {
           ? transactionsRes.data 
           : [];
       setTransactions(transactionData.slice(0, 10));
+      setCategories(categoriesRes.data);
       setBudgetRules(Array.isArray(rulesRes.data) ? rulesRes.data : []);
       setCalendarEvents(Array.isArray(eventsRes.data) ? eventsRes.data : []);
       console.log('Dữ liệu analytics:', analyticsRes.data);
@@ -94,6 +98,16 @@ export default function DashboardPage() {
       setLoading(false);
     }
   }, [navigate, t]);
+
+  const categoryMap = useMemo(() => {
+        const map = new Map();
+        if (categories) {
+            categories.forEach(cat => {
+                map.set(cat.categoryId, cat.name);
+            });
+        }
+        return map;
+    }, [categories]);
 
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -117,7 +131,7 @@ export default function DashboardPage() {
 
   const lineChartData = analytics
     ? Object.entries(analytics.categoryExpenses).map(([categoryId, total]) => ({
-        name: transactions.find(t => t.categoryId === parseInt(categoryId))?.Category?.name || t('dashboard.category_fallback', { id: categoryId }),
+        name: categoryMap.get(parseInt(categoryId)) || t('dashboard.category_fallback', { id: categoryId }),
         total,
       }))
     : [];
@@ -213,10 +227,10 @@ export default function DashboardPage() {
                         <PieChart>
                           <Pie
                             data={Object.entries(analytics.categoryExpenses).map(([categoryId, total]) => ({
-                              name: transactions.find(t => t.categoryId === parseInt(categoryId))?.Category?.name || `Danh mục ${categoryId}`,
-                              total,
-                            }))}
-                            dataKey="total"
+                              name: categoryMap.get(parseInt(categoryId)) || t('transactions.categoryWithId', { id: categoryId }),
+    total,
+  }))}
+  dataKey="total"
                             nameKey="name"
                             cx="50%"
                             cy="50%"

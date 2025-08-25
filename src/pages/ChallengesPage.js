@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import Sidebar from '../components/Sidebar';
 import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
+import { useChallengeNotifications } from '../contexts/ChallengeContext';
 
 
 export default function ChallengesPage() {
@@ -13,6 +14,7 @@ export default function ChallengesPage() {
   const [challenges, setChallenges] = useState([]);
   const [randomChallenge, setRandomChallenge] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { refetchChallenges } = useChallengeNotifications();
 
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -52,6 +54,7 @@ export default function ChallengesPage() {
         api.fetchUserChallenges().then(({ data }) => setChallenges(data)),
         api.fetchRandomChallenge().then(({ data }) => setRandomChallenge(data)).catch(() => setRandomChallenge(null)),
       ]);
+      refetchChallenges(false); 
     } catch (err) {
       toast.error(err.response?.data?.message || t('errors.operationFailed'));
     } finally {
@@ -76,6 +79,7 @@ export default function ChallengesPage() {
           }
         }),
       ]);
+      refetchChallenges(false);
     } catch (err) {
       console.error('Complete challenge error:', err);
       toast.error(err.response?.data?.message || t('errors.operationFailed'));
@@ -83,6 +87,8 @@ export default function ChallengesPage() {
       setLoading(false);
     }
   };
+
+  const pendingChallenges = challenges.filter(c => c.status === 'pending');
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
@@ -98,6 +104,20 @@ export default function ChallengesPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-white shadow rounded-lg p-6">
                 <h3 className="text-lg font-medium text-gray-900 mb-4">{t('challenges.newChallenge')}</h3>
+                {pendingChallenges.length > 0 && (
+        <div className="mb-6 pb-6 border-b border-gray-200">
+            <h4 className="text-sm font-semibold text-gray-800 mb-2">
+                📣 {t('challenges.pendingReminders')}
+            </h4>
+            <ul className="list-disc list-inside space-y-1 text-sm text-gray-600">
+                {pendingChallenges.map(challenge => (
+                    <li key={challenge.userChallengeId}>
+                        {challenge.Challenge?.description || 'Unknown'}
+                    </li>
+                ))}
+            </ul>
+        </div>
+    )}
                 {randomChallenge ? (
                   <>
                     <p className="text-sm text-gray-500">{randomChallenge.description}</p>

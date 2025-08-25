@@ -129,7 +129,10 @@
     "title": "Challenges",
     "startChallenge": "Start Challenge",
     "newChallenge": "New Challenge",
+    "pendingReminder": "You have an unfinished challenge, keep going!",
     "yourChallenges": "Your Challenges",
+    "pendingReminders": "Pending challenges reminders:",
+    "noNewChallengeAvailable": "No new challenges available. Please complete your current challenges!",
     "noChallenges": "No challenges available",
     "started": "Challenge started",
     "completed": "Challenge completed",
@@ -278,6 +281,7 @@
   }
   },
   "transactions": {
+     "categoryWithId": "Category {{id}}",
     "create": "Add Transaction",
     "edit": "Edit Transaction",
     "category": "Category",

@@ -140,6 +140,9 @@
     "noChallenges": "Không có thử thách nào",
     "started": "Đã bắt đầu thử thách",
     "completed": "Đã hoàn thành thử thách",
+    "pendingReminders": "Nhắc nhở các thử thách đang chờ:",
+    "noNewChallengeAvailable": "Hiện không có thử thách mới nào. Hãy hoàn thành các thử thách hiện tại nhé!",
+    "pendingReminder": "Bạn có thử thách chưa hoàn thành, hãy tiếp tục nhé!",
     "complete": "Hoàn Thành",
     "reward": "Phần Thưởng",
     "points": "điểm",
@@ -269,6 +272,7 @@
   }
   },
   "transactions": {
+    "categoryWithId": "Danh mục {{id}}",
     "title": "Giao dịch",
          "list": "Danh sách giao dịch",
          "addTransaction": "Thêm giao dịch",

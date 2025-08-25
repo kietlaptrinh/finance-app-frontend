@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useChallengeNotifications } from '../contexts/ChallengeContext';
 
 const Sidebar = () => {
     const { t } = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
+    const { pendingChallengeCount } = useChallengeNotifications();
 
     
     useEffect(() => {
@@ -18,7 +20,7 @@ const Sidebar = () => {
         { path: '/budgets', label: t('budgets.title'), icon: '💰' },
         { path: '/saving-goals', label: t('savingGoals.title'), icon: '🎯' },
         { path: '/piggy-bank', label: t('piggyBank.title'), icon: '🐷' },
-        { path: '/challenges', label: t('challenges.title'), icon: '🏆' },
+        { path: '/challenges', label: t('challenges.title'), icon: '🏆', notificationCount: pendingChallengeCount },
         { path: '/currency', label: t('currencyConverter.title'), icon: '💸' },
         { path: '/leaderboard', label: t('leaderboard.title'), icon: '🥇' },
         { path: '/settings', label: t('settings.title'), icon: '⚙️' },
@@ -62,8 +64,15 @@ const Sidebar = () => {
                                 }`
                             }
                         >
-                            <span className="mr-3 text-xl">{item.icon}</span>
-                            {item.label}
+                            <div className="flex items-center">
+                                <span className="mr-3 text-xl">{item.icon}</span>
+                                {item.label}
+                            </div>
+                            {item.notificationCount > 0 && (
+                                <span className="bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+                                    {item.notificationCount}
+                                </span>
+                            )}
                         </NavLink>
                     ))}
                 </nav>
