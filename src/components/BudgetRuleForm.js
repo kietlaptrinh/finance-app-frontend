@@ -42,10 +42,10 @@ const BudgetRuleForm = ({ onSuccess, onCancel }) => {
 
         try {
             await api.createBudgetRule(dataToSend);
-        toast.success('Đã tạo quy tắc thành công!');
+        toast.success(t('budgetRules.createSuccess'));
         onSuccess();
         } catch (err) {
-            toast.error(err.response?.data?.message || 'Tạo quy tắc thất bại.');
+            toast.error(err.response?.data?.message || t('budgetRules.createFailed'));
         } finally {
             setLoading(false);
         }

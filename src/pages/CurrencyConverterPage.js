@@ -101,7 +101,7 @@ const fetchHistorical = async () => {
         }
         
         if (attempts >= maxAttempts && rates.length < 5) {
-            toast.error("Không thể lấy đủ dữ liệu lịch sử.");
+            toast.error(t('errors.notEnoughHistoricalData'));
         }
 
         rates.sort((a, b) => new Date(a.date) - new Date(b.date));

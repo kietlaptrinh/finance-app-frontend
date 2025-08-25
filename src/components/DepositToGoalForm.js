@@ -14,10 +14,10 @@ const DepositToGoalForm = ({ goal, onSuccess, onCancel }) => {
         setLoading(true);
         try {
             await api.depositToSavingGoal(goal.goalId, { amount: parseFloat(amount) });
-            toast.success(`Đã nạp tiền vào mục tiêu "${goal.name}"`);
+            toast.success(t('savingGoals.depositSuccess', { name: goal.name }));
             onSuccess();
         } catch (err) {
-            toast.error(err.response?.data?.message || 'Nạp tiền thất bại.');
+            toast.error(err.response?.data?.message || t('savingGoals.depositFailed'));
         } finally {
             setLoading(false);
         }
@@ -25,9 +25,9 @@ const DepositToGoalForm = ({ goal, onSuccess, onCancel }) => {
 
     return (
         <form onSubmit={handleSubmit} className="space-y-4">
-            <h2 className="text-xl font-bold">Nạp tiền cho "{goal.name}"</h2>
+            <h2 className="text-xl font-bold">{t('savingGoals.depositFor', { name: goal.name })}</h2>
             <div>
-                <label className="text-sm font-medium text-gray-700">Số tiền muốn nạp</label>
+                <label className="text-sm font-medium text-gray-700">{t('savingGoals.amountToDeposit')}</label>
                 <input
                     type="number"
                     value={amount}
@@ -35,13 +35,13 @@ const DepositToGoalForm = ({ goal, onSuccess, onCancel }) => {
                     required
                     min="1"
                     className="mt-1 w-full p-2 border rounded-lg"
-                    placeholder="Số tiền lấy từ heo đất chính"
+                    placeholder={t('savingGoals.amountPlaceholder')}
                 />
             </div>
             <div className="flex justify-end space-x-2">
-                <button type="button" onClick={onCancel} className="px-4 py-2 bg-gray-200 rounded">Hủy</button>
+                <button type="button" onClick={onCancel} className="px-4 py-2 bg-gray-200 rounded">{t('savingGoals.cancel')}</button>
                 <button type="submit" disabled={loading} className="px-4 py-2 bg-pink-500 text-white rounded disabled:bg-pink-300">
-                    {loading ? 'Đang nạp...' : 'Xác nhận'}
+                    {loading ? t('savingGoals.depositing') : t('savingGoals.confirm')}
                 </button>
             </div>
         </form>

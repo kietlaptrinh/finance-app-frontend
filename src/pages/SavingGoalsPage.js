@@ -237,7 +237,7 @@ export default function SavingGoalsPage() {
                                                         setGoalToDeposit(goal);
                                                         setIsDepositModalOpen(true);
                                                     }}
-                                                    title={`Nạp tiền cho ${goal.name}`}
+                                                    title={t('savingGoals.depositFor', { name: goal.name })}
                                                     className="p-2 rounded-full hover:bg-pink-100 transition-colors"
                                                 >
                                                     <span role="img" aria-label="deposit" className="text-2xl animate-bounce">🐖</span>

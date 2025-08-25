@@ -106,7 +106,7 @@ const BudgetForm = ({ onSuccess, onCancel, budget = null }) => {
                     readOnly={isPointsHarvest}
                     className={`mt-1 w-full px-4 py-2 border rounded-lg ${isPointsHarvest ? 'bg-gray-200' : ''}`}
         />
-        {isPointsHarvest && <p className="text-xs text-gray-500 mt-1">Số tiền sẽ được tự động cộng từ việc quy đổi điểm.</p>}
+        {isPointsHarvest && <p className="text-xs text-gray-500 mt-1">{t('budgets.pointsHarvestNote')}</p>}
       </div>
       <div>
         <label className="text-sm font-medium text-gray-700">{t('budgets.period')}</label>
@@ -119,7 +119,7 @@ const BudgetForm = ({ onSuccess, onCancel, budget = null }) => {
           <option value="monthly">{t('budgets.monthly')}</option>
           <option value="weekly">{t('budgets.weekly')}</option>
           <option value="yearly">{t('budgets.yearly')}</option>
-          <option value="points_harvest">Thu thập từ Điểm thưởng</option>
+          <option value="points_harvest">{t('budgets.pointsHarvest')}</option>
         </select>
       </div>
       <div>

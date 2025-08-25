@@ -15,6 +15,7 @@
     "fetchHistoricalRates": "Không thể tải tỷ giá lịch sử",
     "fetchPiggyBank": "Không thể tải dữ liệu heo đất",
     "fetchGoals": "Không thể tải mục tiêu tiết kiệm",
+    "notEnoughHistoricalData": "Không thể lấy đủ dữ liệu lịch sử.",
     "fetchSettings": "Không thể tải cài đặt",
     "operationFailed": "Thao tác thất bại"
   },
@@ -24,9 +25,15 @@
     "totalIncome": "Tổng Thu Nhập (Tháng)",
     "totalExpense": "Tổng Chi Tiêu (Tháng)",
     "currentBalance": "Số Dư Hiện Tại (Tháng)",
+    "category_fallback": "Category {id}",
     "expenseByCategory": "Chi Tiêu Theo Danh Mục",
+    "noBudgetProgress": "Chưa có tiến độ ngân sách.",
+    "noSavingGoals": "Chưa có mục tiêu tiết kiệm.",
     "noTransactions": "Không có giao dịch nào",
+    "budgetWithId": "Ngân sách {{id}}",
     "cashFlow": "Dòng Tiền",
+    "adjusted": "điều chỉnh",
+    "harvesting": "Đang thu thập",
     "budgetProgress": "Tiến Độ Ngân Sách",
     "savingGoalsProgress": "Tiến Độ Mục Tiêu Tiết Kiệm",
     "recentTransactions": "Giao Dịch Gần Đây",
@@ -47,6 +54,8 @@
     "monthly": "Hàng Tháng",
     "weekly": "Hàng Tuần",
     "yearly": "Hàng Năm",
+    "pointsHarvest": "Thu thập từ Điểm thưởng",
+    "pointsHarvestNote": "Số tiền sẽ được tự động cộng từ việc quy đổi điểm.",
     "startDate": "Ngày Bắt Đầu",
     "endDate": "Ngày Kết Thúc",
     "cancel": "Hủy",
@@ -64,11 +73,18 @@
     "addGoal": "Thêm Mục Tiêu",
     "create": "Tạo Mục Tiêu",
     "edit": "Chỉnh Sửa Mục Tiêu",
+    "depositFor": "Nạp tiền cho {{name}}",
+    "depositSuccess": "Đã nạp tiền vào mục tiêu \"{{name}}\"",
+    "depositFailed": "Nạp tiền thất bại.",
+    "amountToDeposit": "Số tiền muốn nạp",
+    "amountPlaceholder": "Số tiền lấy từ heo đất chính",
+    "depositing": "Đang nạp...",
+    "confirm": "Xác nhận",
+    "cancel": "Hủy",
     "name": "Tên",
     "targetAmount": "Số Tiền Mục Tiêu (VND)",
     "startDate": "Ngày Bắt Đầu",
     "endDate": "Ngày Kết Thúc (Tùy Chọn)",
-    "cancel": "Hủy",
     "update": "Cập Nhật",
     "saving": "Đang Lưu...",
     "created": "Đã tạo mục tiêu",
@@ -146,13 +162,16 @@
     "conversionHistory": "Lịch Sử Chuyển Đổi",
     "noHistory": "Không có lịch sử chuyển đổi",
     "viewHistoricalRates": "Xem Tỷ Giá Lịch Sử",
-    "ratesFetched": "Đã tải tỷ giá lịch sử",
     "failed": "Chuyển đổi thất bại",
     "ratesFetched": "Tỷ giá đã được cập nhật thành công."
   },
   "settings": {
     "title": "Cài Đặt",
     "generalSettings": "Cài Đặt Chung",
+    "confirmDeleteRule": "Bạn có chắc muốn xóa quy tắc này?",
+    "ruleDeleted": "Đã xóa quy tắc.",
+    "noRules": "Chưa có quy tắc nào.",
+    "pasteCalendarLink": "Dán link .ics từ lịch của bạn",
     "moodBasedTheme": "Chủ Đề Dựa Trên Tâm Trạng",
     "currentMood": "Tâm Trạng Hiện Tại",
     "calendarSyncUrl": "URL Đồng Bộ Lịch",
@@ -169,7 +188,8 @@
     "eventTypes": {
     "exam_week": "Tuần thi",
     "summer_break": "Kỳ nghỉ hè",
-    "custom": "Thời gian tùy chỉnh"
+    "custom": "Thời gian tùy chỉnh",
+    "noRules": "Không có quy tắc nào được áp dụng"
 },
     "expense": "Chi Phí",
     "income": "Thu Nhập",
@@ -240,7 +260,8 @@
     "fetchTransactions": "Không thể tải danh sách giao dịch",
     "fetchCategories": "Không thể tải danh sách danh mục",
     "fetchSettings": "Không thể tải cài đặt",
-    "operationFailed": "Thao tác thất bại"
+    "operationFailed": "Thao tác thất bại",
+    "deleteRuleFailed": "Xóa quy tắc thất bại."
   },
   "loading": "Đang tải...",
   "piggyBank": {
@@ -251,6 +272,7 @@
     "title": "Giao dịch",
          "list": "Danh sách giao dịch",
          "addTransaction": "Thêm giao dịch",
+         "noTransactions": "Không có giao dịch nào",
     "create": "Thêm Giao Dịch",
     "editButton": "Chỉnh sửa",
     "delete": "Xóa",
@@ -294,5 +316,21 @@
   },
   "auth": {
     "logoutSuccess": "Đăng xuất thành công!"
+  },
+  "export": {
+    "transactionId": "Mã giao dịch",
+    "category": "Danh mục",
+    "amount": "Số tiền",
+    "date": "Ngày",
+    "type": "Loại",
+    "note": "Ghi chú",
+    "unknown": "Không xác định"
+  },
+  "common": {
+    "delete": "Xóa"
+  },
+  "budgetRules": {
+    "createSuccess": "Đã tạo quy tắc thành công!",
+    "createFailed": "Tạo quy tắc thất bại."
   }
 }

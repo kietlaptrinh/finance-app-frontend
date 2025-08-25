@@ -11,6 +11,7 @@
     "fetchCategories": "Failed to fetch categories",
     "fetchBudgets": "Failed to fetch budgets",
     "fetchChallenges": "Failed to fetch challenges",
+    "notEnoughHistoricalData": "Unable to fetch enough historical data.",
     "fetchConversionHistory": "Failed to fetch conversion history",
     "fetchHistoricalRates": "Failed to fetch historical rates",
     "fetchPiggyBank": "Failed to fetch Piggy Bank",
@@ -35,7 +36,14 @@
     "addTransaction": "Add Transaction",
     "totalIncome": "Total Income (Month)",
     "totalExpense": "Total Expense (Month)",
+    "categoryFix": "Category",
+    "category_fallback": "Danh mục {id}",
+    "adjusted": "adjusted",
+    "budgetWithId": "Budget {{id}}",
+    "harvesting": "Harvesting",
     "currentBalance": "Current Balance (Month)",
+    "noBudgetProgress": "No budget progress available.",
+    "noSavingGoals": "No saving goals available.",
     "expenseByCategory": "Expense by Category",
     "cashFlow": "Cash Flow",
     "budgetProgress": "Budget Progress",
@@ -59,6 +67,8 @@
     "monthly": "Monthly",
     "weekly": "Weekly",
     "yearly": "Yearly",
+    "pointsHarvest": "Collect from Reward Points",
+    "pointsHarvestNote": "The amount will be automatically added from points conversion.",
     "startDate": "Start Date",
     "endDate": "End Date",
     "cancel": "Cancel",
@@ -72,6 +82,14 @@
     "noBudgets": "No budgets available"
   },
   "savingGoals": {
+    "depositFor": "Deposit to {{name}}",
+    "depositSuccess": "Successfully deposited to \"{{name}}\"",
+    "depositFailed": "Deposit failed.",
+    "amountToDeposit": "Amount to deposit",
+    "amountPlaceholder": "Amount taken from main piggy bank",
+    "depositing": "Depositing...",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
     "title": "Saving Goals",
     "addGoal": "Add Goal",
     "create": "Create Goal",
@@ -166,6 +184,7 @@
     "title": "Settings",
     "eventTypes": {
     "exam_week": "Exam Week",
+    "category": "Category",
     "summer_break": "Summer Break",
     "custom": "Custom Period"
 },
@@ -223,6 +242,7 @@
     "confirmDeleteAccount": "Are you sure you want to delete your account? This is irreversible.",
     "updated": "Settings updated",
     "categoryCreated": "Category created",
+    "noRules": "No rules applied",
     "exported": "Data exported",
     "challenges": "Challenges",
     "noChallenges": "No challenges yet",
@@ -268,6 +288,7 @@
     "delete": "Delete",
     "type": "Type",
     "note": "Note",
+    "noTransactions": "No transactions available",
     "receiptImageUrl": "Receipt URL",
     "cancel": "Cancel",
     "update": "Update",
@@ -290,5 +311,12 @@
   "previous": "Previous",
   "page": "Page",
   "next": "Next"
-}
+},
+"common": {
+    "delete": "Delete"
+  },
+  "budgetRules": {
+    "createSuccess": "Budget rule created successfully!",
+    "createFailed": "Failed to create budget rule."
+  }
 }

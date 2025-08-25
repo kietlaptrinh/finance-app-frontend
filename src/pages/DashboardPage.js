@@ -117,7 +117,7 @@ export default function DashboardPage() {
 
   const lineChartData = analytics
     ? Object.entries(analytics.categoryExpenses).map(([categoryId, total]) => ({
-        name: transactions.find(t => t.categoryId === parseInt(categoryId))?.Category?.name || `Danh mục ${categoryId}`,
+        name: transactions.find(t => t.categoryId === parseInt(categoryId))?.Category?.name || t('dashboard.category_fallback', { id: categoryId }),
         total,
       }))
     : [];
@@ -277,7 +277,7 @@ export default function DashboardPage() {
                 <p className="text-sm font-medium text-gray-900">
                     {bp.categoryName}
                     <span className="ml-2 text-xs font-semibold text-green-600 bg-green-100 px-2 py-0.5 rounded-full">
-                        Đang thu thập
+                        {t('dashboard.harvesting')}
                     </span>
                 </p>
                 <p className="text-lg font-bold text-green-700 mt-1">
@@ -288,9 +288,9 @@ export default function DashboardPage() {
                                               <div>
                                                 <div className="flex justify-between items-center mb-1">
                                                     <p className="text-sm font-medium text-gray-900">
-                                                        {bp.categoryName || `Ngân sách ${bp.budgetId}`}
+                                                        {bp.categoryName || t('dashboard.budgetWithId', { id: bp.budgetId })}
                                                         {/* Hiển thị tag (đã điều chỉnh) nếu có */}
-                                                        {isAdjusted && <span className="ml-2 text-xs font-semibold text-blue-600 bg-blue-100 px-2 py-0.5 rounded-full">Đã điều chỉnh</span>}
+                                                        {isAdjusted && <span className="ml-2 text-xs font-semibold text-blue-600 bg-blue-100 px-2 py-0.5 rounded-full">{t('dashboard.adjusted')}</span>}
                                                     </p>
                                                     <p className="text-sm text-gray-600">
                                                         {formatTooltipValue(bp.spent)} / {formatTooltipValue(budgetLimit)}

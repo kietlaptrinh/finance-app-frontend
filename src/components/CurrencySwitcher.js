@@ -15,7 +15,7 @@ const CurrencySwitcher = () => {
     <button
       onClick={toggleCurrency}
       className="px-3 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 focus:outline-none"
-      title={`Chuyển sang ${currency === 'VND' ? 'AUD' : 'VND'}`}
+      title={`Switch to ${currency === 'VND' ? 'AUD' : 'VND'}`}
     >
       {currency}
     </button>

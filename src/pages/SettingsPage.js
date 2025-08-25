@@ -281,13 +281,13 @@ export default function SettingsPage() {
     };
 
     const handleDeleteRule = async (ruleId) => {
-        if (window.confirm("Bạn có chắc muốn xóa quy tắc này?")) {
+        if (window.confirm(t('settings.confirmDeleteRule'))) {
             try {
                 await api.deleteBudgetRule(ruleId);
-                toast.success("Đã xóa quy tắc.");
+                toast.success(t('settings.ruleDeleted'));
                 fetchData();
             } catch (err) {
-                toast.error("Xóa quy tắc thất bại.");
+                toast.error(t('errors.deleteRuleFailed'));
             }
         }
     };
@@ -337,7 +337,7 @@ export default function SettingsPage() {
                                                     name="calendarSyncUrl"
                                                     type="url"
                                                     defaultValue={settings.calendarSyncUrl}
-                                                    placeholder="Dán link .ics từ lịch của bạn"
+                                                    placeholder={t('settings.pasteCalendarLink')}
                                                     className="mt-1 w-full px-4 py-2 border rounded-lg"
                                                 />
                                             </div>
@@ -376,9 +376,9 @@ export default function SettingsPage() {
                                                 <span className="flex-1 pr-4">
                                                     {t('settings.rules.when')} **{rule.eventType}**, {t('settings.rules.budgetFor')} **{rule.Category?.name}** {t('settings.rules.will')} {rule.adjustmentValue > 0 ? t('settings.rules.increase') : t('settings.rules.decrease')} **{Math.abs(rule.adjustmentValue)}{rule.adjustmentType === 'percentage' ? '%' : ' VND'}**.
                                                 </span>
-                                                <button onClick={() => handleDeleteRule(rule.ruleId)} className="text-red-500 hover:text-red-700 font-medium">Xóa</button>
+                                                <button onClick={() => handleDeleteRule(rule.ruleId)} className="text-red-500 hover:text-red-700 font-medium">{t('common.delete')}</button>
                                             </li>
-                                        )) : <p className="text-sm text-gray-500">Chưa có quy tắc nào.</p>}
+                                        )) : <p className="text-sm text-gray-500">{t('settings.noRules')}</p>}
                                     </ul>
                                 </div>
 
