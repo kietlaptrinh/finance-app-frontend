@@ -8,7 +8,7 @@ import Modal from '../components/Modal';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 import { useTranslation } from 'react-i18next';
-import { useCurrency } from '../contexts/CurrencyContext'; // <<< THAY ĐỔI: 1. Import hook
+import { useCurrency } from '../contexts/CurrencyContext'; 
 import { formatAndConvertCurrency } from '../utils/formatCurrency';
 
 const SummaryCard = ({ title, amount, cardType}) => {
@@ -270,6 +270,22 @@ export default function DashboardPage() {
 
                         return (
                                             <div key={bp.budgetId} className="mb-4">
+
+                                              {bp.isHarvestBudget ? (
+            // Giao diện cho Ngân sách Thu thập
+            <div>
+                <p className="text-sm font-medium text-gray-900">
+                    {bp.categoryName}
+                    <span className="ml-2 text-xs font-semibold text-green-600 bg-green-100 px-2 py-0.5 rounded-full">
+                        Đang thu thập
+                    </span>
+                </p>
+                <p className="text-lg font-bold text-green-700 mt-1">
+                    {formatTooltipValue(bp.harvestedAmount)}
+                </p>
+            </div>
+        ) : (
+                                              <div>
                                                 <div className="flex justify-between items-center mb-1">
                                                     <p className="text-sm font-medium text-gray-900">
                                                         {bp.categoryName || `Ngân sách ${bp.budgetId}`}
@@ -288,6 +304,8 @@ export default function DashboardPage() {
                                                 </div>
                                                 <p className="text-right text-sm text-gray-500 mt-1">{progressPercentage.toFixed(1)}%</p>
                                             </div>
+                                            )}
+    </div>
                                         );
                                     })
                                 ) : (

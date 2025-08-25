@@ -6,6 +6,7 @@ import Sidebar from '../components/Sidebar';
 import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
 
+
 export default function ChallengesPage() {
   const navigate = useNavigate();
   const { t } = useTranslation();

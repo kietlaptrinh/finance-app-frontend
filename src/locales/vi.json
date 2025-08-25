@@ -221,7 +221,12 @@
     "saving": "Đang lưu...",
     "createRule": "Tạo Quy Tắc",
     "success": "Đã tạo quy tắc thành công!",
-    "fail": "Tạo quy tắc thất bại."
+    "fail": "Tạo quy tắc thất bại.",
+    "when": "Khi có",
+"budgetFor": ", ngân sách",
+"will": "sẽ",
+"increase": "tăng",
+"decrease": "giảm"
 },
     "accountDeleted": "Đã xóa tài khoản",
     "operationFailed": "Thao tác thất bại",

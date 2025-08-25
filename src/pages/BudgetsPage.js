@@ -9,6 +9,8 @@ import { useTranslation } from 'react-i18next';
 import { useCurrency } from '../contexts/CurrencyContext';
 import { formatAndConvertCurrency } from '../utils/formatCurrency';
 
+
+
 const BudgetForm = ({ onSuccess, onCancel, budget = null }) => {
   const { t } = useTranslation();
   const [formData, setFormData] = useState({
@@ -20,6 +22,12 @@ const BudgetForm = ({ onSuccess, onCancel, budget = null }) => {
   });
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
+  const isPointsHarvest = formData.period === 'points_harvest';
+  useEffect(() => {
+        if (isPointsHarvest) {
+            setFormData(prev => ({ ...prev, amount: '0' }));
+        }
+    }, [isPointsHarvest]);
 
   useEffect(() => {
     if (budget) {
@@ -94,8 +102,11 @@ const BudgetForm = ({ onSuccess, onCancel, budget = null }) => {
           onChange={handleChange}
           required
           min="0"
-          className="mt-1 w-full px-4 py-2 border rounded-lg"
+          disabled={isPointsHarvest}
+                    readOnly={isPointsHarvest}
+                    className={`mt-1 w-full px-4 py-2 border rounded-lg ${isPointsHarvest ? 'bg-gray-200' : ''}`}
         />
+        {isPointsHarvest && <p className="text-xs text-gray-500 mt-1">Số tiền sẽ được tự động cộng từ việc quy đổi điểm.</p>}
       </div>
       <div>
         <label className="text-sm font-medium text-gray-700">{t('budgets.period')}</label>
@@ -108,6 +119,7 @@ const BudgetForm = ({ onSuccess, onCancel, budget = null }) => {
           <option value="monthly">{t('budgets.monthly')}</option>
           <option value="weekly">{t('budgets.weekly')}</option>
           <option value="yearly">{t('budgets.yearly')}</option>
+          <option value="points_harvest">Thu thập từ Điểm thưởng</option>
         </select>
       </div>
       <div>

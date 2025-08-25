@@ -7,6 +7,7 @@ import Sidebar from '../components/Sidebar';
 import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
 
+
 const CurrencyConverterPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();

@@ -9,6 +9,8 @@ import Header from '../components/Header';
 import BudgetRuleForm from '../components/BudgetRuleForm'; 
 import { useCallback } from 'react';
 
+
+
 const CategoryForm = ({ onSuccess, onCancel }) => {
   const { t } = useTranslation();
   const [formData, setFormData] = useState({
@@ -372,7 +374,7 @@ export default function SettingsPage() {
                                         {budgetRules && budgetRules.length > 0 ? budgetRules.map(rule => (
                                             <li key={rule.ruleId} className="py-3 flex justify-between items-center text-sm">
                                                 <span className="flex-1 pr-4">
-                                                    Khi có **{rule.eventType}**, ngân sách **{rule.Category?.name}** sẽ {rule.adjustmentValue > 0 ? 'tăng' : 'giảm'} **{Math.abs(rule.adjustmentValue)}{rule.adjustmentType === 'percentage' ? '%' : ' VND'}**.
+                                                    {t('settings.rules.when')} **{rule.eventType}**, {t('settings.rules.budgetFor')} **{rule.Category?.name}** {t('settings.rules.will')} {rule.adjustmentValue > 0 ? t('settings.rules.increase') : t('settings.rules.decrease')} **{Math.abs(rule.adjustmentValue)}{rule.adjustmentType === 'percentage' ? '%' : ' VND'}**.
                                                 </span>
                                                 <button onClick={() => handleDeleteRule(rule.ruleId)} className="text-red-500 hover:text-red-700 font-medium">Xóa</button>
                                             </li>

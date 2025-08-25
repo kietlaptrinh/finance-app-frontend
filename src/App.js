@@ -7,6 +7,9 @@ import enTranslation from './locales/en.json';
 import viTranslation from './locales/vi.json';
 import './index.css';
 
+import { useLocation } from 'react-router-dom';
+import Chatbot from './components/Chatbot';
+
 i18n.use(initReactI18next).init({
   resources: {
     en: { translation: enTranslation },
@@ -18,6 +21,8 @@ i18n.use(initReactI18next).init({
 });
 
 function App() {
+  const location = useLocation();
+  const showChatbot = !['/login', '/register'].includes(location.pathname);
   useEffect(() => {
     const settings = JSON.parse(localStorage.getItem('settings') || '{}');
     console.log('App loaded with settings from localStorage:', settings);
@@ -32,6 +37,7 @@ function App() {
     <>
       <Toaster position="top-right" />
       <AppRoutes />
+      {showChatbot && <Chatbot />}
     </>
   );
 }

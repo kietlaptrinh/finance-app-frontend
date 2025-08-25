@@ -1,28 +1,30 @@
-// src/utils/formatCurrency.js (ví dụ)
-
 /**
- * Định dạng và chuyển đổi số tiền dựa trên đơn vị tiền tệ hiện tại
- * @param {number} amount - Số tiền gốc (luôn là VND)
- * @param {string} currency - Đơn vị tiền tệ hiện tại ('VND' hoặc 'AUD')
- * @param {number} exchangeRate - Tỉ giá từ AUD sang VND
+ * Định dạng và chuyển đổi số tiền để hiển thị.
+ * Mặc định số tiền đầu vào là AUD.
+ * @param {number} amount - Số tiền gốc (luôn là AUD)
+ * @param {string} displayCurrency - Đơn vị tiền tệ muốn hiển thị ('AUD' hoặc 'VND')
+ * @param {number} exchangeRate - Tỷ giá từ AUD sang VND
  * @returns {string} - Chuỗi đã định dạng
  */
-export const formatAndConvertCurrency = (amount, currency, exchangeRate) => {
-  if (typeof amount !== 'number' || !currency || !exchangeRate) {
-    return '';
-  }
+export const formatAndConvertCurrency = (amount, displayCurrency, exchangeRate) => {
+    if (typeof amount !== 'number' || !displayCurrency) {
+        return '';
+    }
 
-  let displayAmount = amount;
-  let currencyCode = 'VND';
+    // <<< LOGIC ĐÃ ĐƯỢC CẬP NHẬT >>>
+    let displayAmount = amount;
+    let currencyCode = 'AUD';
+    let locale = 'en-AU'; // Locale cho đô la Úc
 
-  if (currency === 'AUD') {
-    displayAmount = amount / exchangeRate;
-    currencyCode = 'AUD';
-  }
+    // Chỉ chuyển đổi nếu người dùng muốn xem VND và có tỷ giá
+    if (displayCurrency === 'VND' && exchangeRate) {
+        displayAmount = amount * exchangeRate;
+        currencyCode = 'VND';
+        locale = 'vi-VN'; // Locale cho Việt Nam Đồng
+    }
 
-  return new Intl.NumberFormat('vi-VN', {
-    style: 'currency',
-    currency: currencyCode,
-    minimumFractionDigits: 0,
-  }).format(displayAmount);
+    return new Intl.NumberFormat(locale, {
+        style: 'currency',
+        currency: currencyCode,
+    }).format(displayAmount);
 };

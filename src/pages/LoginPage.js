@@ -10,7 +10,11 @@ export default function LoginPage() {
     const handleLogin = async (formData) => {
         try {
             const { data } = await api.login(formData);
-            localStorage.setItem('userInfo', JSON.stringify(data));
+            const userInfoToSave = {
+                ...data.user, 
+                token: data.token
+            };
+            localStorage.setItem('userInfo', JSON.stringify(userInfoToSave));
             toast.success('Login successful!');
             navigate('/'); // Chuyển hướng đến Dashboard
         } catch (error) {
